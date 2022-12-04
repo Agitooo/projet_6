@@ -74,8 +74,20 @@ header {
     width: 100%;
 }
 
+.titre-categ {
+    height: 45px;
+    font-size: 40px;
+    width: auto;
+}
+
 .categorie {
     margin-top: 20px;
+}
+
+.best-movie {
+    height:400px;
+    width:100%;
+    border: 1px solid black;
 }
 
 .movie {

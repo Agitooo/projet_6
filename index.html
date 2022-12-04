@@ -5,6 +5,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+		<!-- CSS in head -->
 		<link rel="stylesheet" href="css/style.css">
 		<title>JustStreamIt</title>
 	</head>
@@ -25,9 +26,24 @@
 			</div>
 		</header>
 		<div class="content mr-auto ml-auto">
-			<div id="best_movie" class=""></div>
-			<div id="best_note" class="categorie ml-auto mr-auto">
-				<div class="titre-categ">Films les mieux notés</div>
+			<section>
+				<div id="best_movie" class="categorie best-movie">
+					<input id="best_movie_id" type="hidden" value="">
+					<img id="background_best_movie" src="" alt="movie poster">
+					<div>
+						<span id="titre_best_movie"></span>
+					</div>
+					<div id="button_best_movie">
+						<button class="button-play">&#9658; Regarder</button>
+						<button class="button-detail">Plus d'infos</button>
+					</div>
+					<div>
+						<p id="description_best_movie"></p>
+					</div>
+				</div>
+			</section>
+			<section id="best_note" class="categorie ml-auto mr-auto">
+				<div class="titre-categ"><span>Films les mieux notés</span></div>
 				<div class="bloc-categ">
 					<div class="prev-movie-arrow mt-auto mb-auto"><span><</span></div>
 					<div class="movie"></div>
@@ -39,9 +55,9 @@
 					<div class="movie"></div>
 					<div class="next-movie-arrow mt-auto mb-auto"><span>></span></div>
 				</div>
-			</div>
-			<div id="first_categ" class="categorie ml-auto mr-auto">
-				<div class="titre-categ">Catégorie 1</div>
+			</section>
+			<section id="first_categ" class="categorie ml-auto mr-auto">
+				<div class="titre-categ"><span>Catégorie 1</span></div>
 				<div class="bloc-categ">
 					<div class="prev-movie-arrow mt-auto mb-auto"><span><</span></div>
 					<div class="movie"></div>
@@ -53,9 +69,9 @@
 					<div class="movie"></div>
 					<div class="next-movie-arrow mt-auto mb-auto"><span>></span></div>
 				</div>
-			</div>
-			<div id="second_categ" class="categorie ml-auto mr-auto">
-				<div class="titre-categ">Catégorie 2</div>
+			</section>
+			<section id="second_categ" class="categorie ml-auto mr-auto">
+				<div class="titre-categ"><span>Catégorie 2</span></div>
 				<div class="bloc-categ">
 					<div class="prev-movie-arrow arrow mt-auto mb-auto"><span><</span></div>
 					<div class="movie"></div>
@@ -67,9 +83,9 @@
 					<div class="movie"></div>
 					<div class="next-movie-arrow mt-auto mb-auto"><span>></span></div>
 				</div>
-			</div>
-			<div id="third_categ" class="categorie ml-auto mr-auto">
-				<div class="titre-categ">Catégorie 3</div>
+			</section>
+			<section id="third_categ" class="categorie ml-auto mr-auto">
+				<div class="titre-categ"><span>Catégorie 3</span></div>
 				<div class="bloc-categ">
 					<div class="prev-movie-arrow mt-auto mb-auto"><span><</span></div>
 					<div class="movie"></div>
@@ -81,7 +97,14 @@
 					<div class="movie"></div>
 					<div class="next-movie-arrow mt-auto mb-auto"><span>></span></div>
 				</div>
-			</div>
+			</section>
 		</div>
+		<p>Hello</p>
+		<button onclick="bestMentor()">Pourquoi ?</button>
+		<div id="test"></div>
+		<div id="movies"></div>
+		<button onclick="appendMoviesList()">voir les films</button>
 	</body>
+	<!-- JS always in queue -->
+	<script src="js/script.js"></script>
 </html>
