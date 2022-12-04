@@ -1,0 +1,90 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.d-block {
+    display: block;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.mr-auto {
+    margin-right: auto;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.mt-auto {
+    margin-top: auto;
+}
+
+.mb-auto {
+    margin-bottom: auto;
+}
+
+header {
+    height: 200px;
+    width: 90%;
+    background-color: #62757f;
+}
+
+.logo-img {
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-menu > ul {
+  display: flex;
+  height: 100%;
+}
+
+.home {
+    width: 90%;
+}
+
+.content {
+    width: 90%;
+}
+
+.prev-movie-arrow, .next-movie-arrow {
+    cursor: pointer;
+}
+
+.prev-movie-arrow > span, .next-movie-arrow > span {
+    vertical-align: middle;
+    margin: 0px 10px 0px 10px;
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.bloc-categ {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.categorie {
+    margin-top: 20px;
+}
+
+.movie {
+    height:250px;
+    width:25%;
+    border: 1px solid black;
+    overflow: hidden;
+}
+
+.ss-menu {
+    text-align: center;
+}
