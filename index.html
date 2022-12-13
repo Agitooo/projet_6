@@ -1,110 +1,80 @@
 <!DOCTYPE html>
 <html lang="fr">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
-		<!-- CSS in head -->
-		<link rel="stylesheet" href="css/style.css">
-		<title>JustStreamIt</title>
-	</head>
-	<body>
-		<header class="menu mr-auto ml-auto">
-			<div class="logo">
-				<a href="index.html">
-					<img class="logo-img" src="img/juststreamit.png" alt="JustStreamIt">
-				</a>
-			</div>
-			<div>
-				<nav class="d-block">
-					<ul class="d-flex">
-						<li id="accueil"><span>Accueil</span></li>
-						<li id="categorie"><span>Catégories</span></li>
-					</ul>
-				</nav>
-			</div>
-		</header>
-		<div class="content mr-auto ml-auto">
-			<section>
-				<div id="best_movie" class="categorie best-movie">
-					<input id="best_movie_id" type="hidden" value="">
-					<img id="background_best_movie" src="" alt="movie poster">
-					<div>
-						<span id="titre_best_movie"></span>
-					</div>
-					<div id="button_best_movie">
-						<button class="button-play">&#9658; Regarder</button>
-						<button class="button-detail">Plus d'infos</button>
-					</div>
-					<div>
-						<p id="description_best_movie"></p>
-					</div>
-				</div>
-			</section>
-			<section id="best_note" class="categorie ml-auto mr-auto">
-				<div class="titre-categ"><span>Films les mieux notés</span></div>
-				<div class="bloc-categ">
-					<div class="prev-movie-arrow mt-auto mb-auto"><span><</span></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="next-movie-arrow mt-auto mb-auto"><span>></span></div>
-				</div>
-			</section>
-			<section id="first_categ" class="categorie ml-auto mr-auto">
-				<div class="titre-categ"><span>Catégorie 1</span></div>
-				<div class="bloc-categ">
-					<div class="prev-movie-arrow mt-auto mb-auto"><span><</span></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="next-movie-arrow mt-auto mb-auto"><span>></span></div>
-				</div>
-			</section>
-			<section id="second_categ" class="categorie ml-auto mr-auto">
-				<div class="titre-categ"><span>Catégorie 2</span></div>
-				<div class="bloc-categ">
-					<div class="prev-movie-arrow arrow mt-auto mb-auto"><span><</span></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="next-movie-arrow mt-auto mb-auto"><span>></span></div>
-				</div>
-			</section>
-			<section id="third_categ" class="categorie ml-auto mr-auto">
-				<div class="titre-categ"><span>Catégorie 3</span></div>
-				<div class="bloc-categ">
-					<div class="prev-movie-arrow mt-auto mb-auto"><span><</span></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="movie"></div>
-					<div class="next-movie-arrow mt-auto mb-auto"><span>></span></div>
-				</div>
-			</section>
-		</div>
-		<p>Hello</p>
-		<button onclick="bestMentor()">Pourquoi ?</button>
-		<div id="test"></div>
-		<div id="movies"></div>
-		<button onclick="appendMoviesList()">voir les films</button>
-	</body>
-	<!-- JS always in queue -->
-	<script src="js/script.js"></script>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
+    <!-- CSS in head -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>JustStreamIt</title>
+</head>
+
+<body>
+    <header class="menu mr-auto ml-auto">
+        <div class="logo">
+            <a href="index.html">
+                <img class="logo-img" src="img/juststreamit.png" alt="JustStreamIt">
+            </a>
+        </div>
+        <div>
+            <nav class="d-block">
+                <ul class="d-flex">
+                    <li id="accueil"><span>Accueil</span></li>
+                    <li id="categorie"><span>Catégories</span></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div id="content" class="content mr-auto ml-auto">
+        <section class="order-1">
+            <div id="best_movie" class="categorie best-movie d-flex">
+                <div id="info_best_movie">
+                    <input id="best_movie_id" type="hidden" value="">
+                    <div>
+                        <span id="titre_best_movie"></span>
+                    </div>
+                    <div>
+                        <p id="description_best_movie"></p>
+                    </div>
+                    <div id="button_best_movie">
+                        <button class="button-play">&#9658; Regarder</button>
+                        <button class="button-detail">Plus d'infos</button>
+                    </div>
+                </div>
+                <div id="movie_poster">
+                    <img id="background_best_movie" class="affiche-film" src="" alt="movie poster">
+                </div>
+            </div>
+        </section>
+        <!--<section id="best_note" class="categorie ml-auto mr-auto">-->
+            <!--<div class="titre-categ mr-auto ml-auto">-->
+                <!--<span>Top 7 des films les mieux notés</span>-->
+                <!--<span id=""></span>-->
+            <!--</div>-->
+            <!--<div class="bloc-categ">-->
+                <!--<div class="prev-movie-arrow mt-auto mb-auto">-->
+                    <!--<span>&lt;</span>-->
+                <!--</div>-->
+                <!--<div class="container-movie">-->
+                    <!--<div class="movie card"></div>-->
+                    <!--<div class="movie card"></div>-->
+                    <!--<div class="movie card"></div>-->
+                    <!--<div class="movie card"></div>-->
+                    <!--<div class="movie card"></div>-->
+                    <!--<div class="movie card"></div>-->
+                    <!--<div class="movie card"></div>-->
+                <!--</div>-->
+                <!--<div class="next-movie-arrow mt-auto mb-auto">-->
+                    <!--<span>&gt;</span>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</section>-->
+    </div>
+    <div class="footer"></div>
+</body>
+<!-- JS always in queue -->
+<script src="js/script.js"></script>
+
 </html>

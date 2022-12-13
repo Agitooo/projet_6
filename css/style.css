@@ -1,6 +1,14 @@
 body {
     padding: 0;
     margin: 0;
+    background-color: #171a1b;
+    color: white;
+}
+
+header {
+    height: 200px;
+    width: 90%;
+    background-color: #62757f;
 }
 
 .d-block {
@@ -27,12 +35,6 @@ body {
     margin-bottom: auto;
 }
 
-header {
-    height: 200px;
-    width: 90%;
-    background-color: #62757f;
-}
-
 .logo-img {
     max-height: 200px;
     max-width: 200px;
@@ -44,8 +46,8 @@ header {
 }
 
 .nav-menu > ul {
-  display: flex;
-  height: 100%;
+    display: flex;
+    height: 100%;
 }
 
 .home {
@@ -54,49 +56,134 @@ header {
 
 .content {
     width: 90%;
+    display: flex;
+    flex-direction: column;
 }
 
-.prev-movie-arrow, .next-movie-arrow {
-    cursor: pointer;
+.order-1 {
+    order: 1;
 }
 
-.prev-movie-arrow > span, .next-movie-arrow > span {
-    vertical-align: middle;
-    margin: 0px 10px 0px 10px;
-    font-size: 70px;
-    font-weight: bold;
+.order-2 {
+    order: 2;
+}
+
+.order-3 {
+    order: 3;
+}
+
+.order-4 {
+    order: 4;
+}
+
+.order-5 {
+    order: 5;
+}
+
+.order-6 {
+    order: 6;
+}
+
+.order-7 {
+    order: 7;
+}
+
+.best-movie {
+    height: 536px;
+    width: 100%;
+    border: 1px solid black;
+    justify-content: space-between;
+}
+
+.categorie {
+    margin-top: 80px;
+}
+
+.titre-categ {
+    margin-bottom: 30px;
+    height: 45px;
+    font-size: 40px;
+    width: 100%;
 }
 
 .bloc-categ {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    width: 50%;
+}
+
+.prev-movie-arrow,
+.next-movie-arrow {
+    height: 536px;
+    cursor: pointer;
+}
+
+.prev-movie-arrow > span,
+.next-movie-arrow > span {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0px 10px 0px 10px;
+    font-size: 170px;
+    font-weight: bold;
+    height: 100%;
+    width: 100x;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.container-movie {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    height: 536px;
     width: 100%;
-}
-
-.titre-categ {
-    height: 45px;
-    font-size: 40px;
-    width: auto;
-}
-
-.categorie {
-    margin-top: 20px;
-}
-
-.best-movie {
-    height:400px;
-    width:100%;
-    border: 1px solid black;
+    overflow: hidden;
 }
 
 .movie {
-    height:250px;
-    width:25%;
-    border: 1px solid black;
-    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 536px;
+    width: auto;
+    background-color: #313638;
+    margin: 0 10px 0 10px;
+}
+
+.affiche-film {
+    height: 536px;
+    width: 364px;
+}
+
+.shadow:hover {
+    cursor: pointer;
+    box-shadow: -10px 0 32px 0 rgba(173, 169, 169, 0.897);
+}
+
+.big-chiffre {
+    font-size: 465px;
 }
 
 .ss-menu {
     text-align: center;
+}
+
+#background_best_movie {
+    height: auto;
+}
+
+#info_best_movie {
+    order: 1;
+}
+
+#movie_poster {
+    order: 2;
+}
+
+.footer {
+    height: 30px;
 }
