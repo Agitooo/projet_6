@@ -3,6 +3,7 @@ body {
     margin: 0;
     background-color: #171a1b;
     color: white;
+    font-size: 40px;
 }
 
 header {
@@ -13,6 +14,10 @@ header {
 
 .d-block {
     display: block;
+}
+
+.d-none {
+    display: none !important;
 }
 
 .d-flex {
@@ -35,14 +40,27 @@ header {
     margin-bottom: auto;
 }
 
+.c-pointer {
+    cursor: pointer;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
 .logo-img {
     max-height: 200px;
     max-width: 200px;
 }
 
-.menu {
-    display: flex;
-    flex-direction: row;
+.imdb {
+    height: 28px;
 }
 
 .nav-menu > ul {
@@ -56,8 +74,6 @@ header {
 
 .content {
     width: 90%;
-    display: flex;
-    flex-direction: column;
 }
 
 .order-1 {
@@ -107,8 +123,6 @@ header {
 }
 
 .bloc-categ {
-    display: flex;
-    flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
@@ -118,13 +132,10 @@ header {
 .prev-movie-arrow,
 .next-movie-arrow {
     height: 536px;
-    cursor: pointer;
 }
 
 .prev-movie-arrow > span,
 .next-movie-arrow > span {
-    display: flex;
-    flex-direction: column;
     justify-content: space-around;
     margin: 0px 10px 0px 10px;
     font-size: 170px;
@@ -136,8 +147,6 @@ header {
 }
 
 .container-movie {
-    display: flex;
-    flex-direction: row;
     flex-wrap: nowrap;
     height: 536px;
     width: 100%;
@@ -145,8 +154,6 @@ header {
 }
 
 .movie {
-    display: flex;
-    flex-direction: row;
     justify-content: space-between;
     height: 536px;
     width: auto;
@@ -176,12 +183,50 @@ header {
     height: auto;
 }
 
-#info_best_movie {
-    order: 1;
+#bg_modal {
+    z-index: 1;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: #62757f;
+    opacity: 0.8;
 }
 
-#movie_poster {
-    order: 2;
+#modal {
+    z-index: 2;
+    position: fixed;
+    background-color: rgb(10, 10, 10);
+    width: 80%;
+    height: auto;
+    top: 100px; 
+    left: 300px;
+    opacity: inherit;
+    padding: 20px;
+}
+
+#close_modal {
+    justify-content: flex-end;
+    margin: 15px 15px 0px 0px;
+}
+
+.close {
+    width: 40px;
+    height: 40px;
+}
+
+.content-modal {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    justify-content: space-between;
+}
+
+.titre-modal {
+    font-size: 60px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .footer {

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <header class="menu mr-auto ml-auto">
+    <header class="menu flex-row mr-auto ml-auto">
         <div class="logo">
             <a href="index.html">
                 <img class="logo-img" src="img/juststreamit.png" alt="JustStreamIt">
@@ -27,11 +27,11 @@
             </nav>
         </div>
     </header>
-    <div id="content" class="content mr-auto ml-auto">
+    <div id="content" class="content flex-column mr-auto ml-auto">
         <section class="order-1">
             <div id="best_movie" class="categorie best-movie d-flex">
-                <div id="info_best_movie">
-                    <input id="best_movie_id" type="hidden" value="">
+                <div class="order-1">
+                    <!-- <input id="id_best_movie" type="hidden" value=""> -->
                     <div>
                         <span id="titre_best_movie"></span>
                     </div>
@@ -39,11 +39,11 @@
                         <p id="description_best_movie"></p>
                     </div>
                     <div id="button_best_movie">
-                        <button class="button-play">&#9658; Regarder</button>
-                        <button class="button-detail">Plus d'infos</button>
+                        <input type="button" class="button-play" value="&#9658; Regarder">
+                        <input type="button" class="button-detail modal-data" id="id_best_movie" data-film-url="" value="Plus d'infos">
                     </div>
                 </div>
-                <div id="movie_poster">
+                <div class="order-2">
                     <img id="background_best_movie" class="affiche-film" src="" alt="movie poster">
                 </div>
             </div>
@@ -72,6 +72,33 @@
             <!--</div>-->
         <!--</section>-->
     </div>
+    <div id="bg_modal" class="d-none"></div>
+    <div id="modal" class="d-none flex-column">
+        <div>
+            <span id="close_modal" class="d-flex"><img class="close c-pointer" src="img/close-white.png" alt="cross close"></span>
+        </div>
+        <div class="content-modal flex-row">
+            <div class="infos-modal flex-column">
+                <span id="titre_modal" class="titre-modal"></span>
+                <span id="genre_modal"></span>
+                <span id="date_modal"></span>
+                <span id="note_modal"></span>
+                <span id="score_modal"></span>
+                <span id="real_modal"></span>
+                <span id="acteurs_modal"></span>
+                <span id="duree_modal"></span>
+                <span id="pays_modal"></span>
+                <span id="boxoffice_modal"></span>
+            </div>
+            <div class="poster-modal">
+                <img id="poster_modal" class="affiche-film" src="" alt="modal movie poster">
+            </div>
+        </div>
+        <div>
+            <p id="resume_modal"></p>
+        </div>
+    </div>
+    
     <div class="footer"></div>
 </body>
 <!-- JS always in queue -->
