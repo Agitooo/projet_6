@@ -54,28 +54,6 @@ header {
     flex-direction: column;
 }
 
-.logo-img {
-    max-height: 200px;
-    max-width: 200px;
-}
-
-.imdb {
-    height: 28px;
-}
-
-.nav-menu > ul {
-    display: flex;
-    height: 100%;
-}
-
-.home {
-    width: 90%;
-}
-
-.content {
-    width: 90%;
-}
-
 .order-1 {
     order: 1;
 }
@@ -102,6 +80,40 @@ header {
 
 .order-7 {
     order: 7;
+}
+
+.logo-img {
+    height: 200px;
+}
+
+.imdb {
+    height: 28px;
+}
+
+.menu {
+    justify-content: center;
+    vertical-align: middle;
+    align-items: stretch;
+    width: 100%;
+}
+
+.menu div {
+    margin-right: 20px;
+    margin-left: 20px;
+    justify-content: center;
+}
+
+#accueil a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.home {
+    width: 90%;
+}
+
+.content {
+    width: 90%;
 }
 
 .best-movie {
@@ -175,10 +187,6 @@ header {
     font-size: 465px;
 }
 
-.ss-menu {
-    text-align: center;
-}
-
 #background_best_movie {
     height: auto;
 }
@@ -209,6 +217,10 @@ header {
 #close_modal {
     justify-content: flex-end;
     margin: 15px 15px 0px 0px;
+}
+
+.infos-modal {
+    width: 100%;
 }
 
 .close {

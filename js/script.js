@@ -101,8 +101,7 @@ function getMovieForModalByUrl(movieUrl) {
             modalTitre.innerHTML = movieDetail.title;
             modalGenre.innerHTML = "Genres: " + listGenre; // tableau
             modalDateSortie.innerHTML = "Date de sortie: " + dateSortie;
-            modalNote.innerHTML = "Note: " + movieDetail.avg_vote + "/10";
-            modalScoreImdb.innerHTML = "<img class=\"imdb\" src=\"img/imdb.svg\" alt=\"imdb\"> " + movieDetail.imdb_score + "/10";
+            modalNote.innerHTML = "<img class=\"imdb\" src=\"img/imdb.svg\" alt=\"imdb\"> " + movieDetail.imdb_score + "/10 - Spectateurs: " + movieDetail.avg_vote + "/10";
             modalRealisateur.innerHTML = "Réalisateur: " + listRealisateur; // tableau
             modalActeurs.innerHTML = "Acteurs: " + listActeur; // tableau
             modalDuree.innerHTML = "Durée: " + movieDetail.duration + " minutes";
