@@ -82,6 +82,42 @@ header {
     order: 7;
 }
 
+.order-8 {
+    order: 8;
+}
+
+.order-8 {
+    order: 8;
+}
+
+.order-9 {
+    order: 9;
+}
+
+.order-10 {
+    order: 10;
+}
+
+.order-11 {
+    order: 11;
+}
+
+.order-12 {
+    order: 12;
+}
+
+.order-13 {
+    order: 13;
+}
+
+.order-14 {
+    order: 14;
+}
+
+.order-15 {
+    order: 15;
+}
+
 .logo-img {
     height: 200px;
 }
@@ -125,6 +161,7 @@ header {
 
 .categorie {
     margin-top: 80px;
+    width: 100%;
 }
 
 .titre-categ {
@@ -138,7 +175,6 @@ header {
     flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
-    width: 50%;
 }
 
 .prev-movie-arrow,
@@ -153,7 +189,7 @@ header {
     font-size: 170px;
     font-weight: bold;
     height: 100%;
-    width: 100x;
+    width: 100px;
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -171,6 +207,7 @@ header {
     width: auto;
     background-color: #313638;
     margin: 0 10px 0 10px;
+    break-inside: avoid
 }
 
 .affiche-film {
