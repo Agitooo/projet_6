@@ -25,18 +25,18 @@
         </header>
         <div id="content" class="content flex-column mr-auto ml-auto">
             <div class="order-1">
-                <div id="best_movie" class="categorie best-movie d-flex">
-                    <div class="order-1">
+                <div id="best_movie" class="categorie best-movie flex-row">
+                    <div class="order-1 flex-column ml-auto mr-auto content-best-movie">
                         <!-- <input id="id_best_movie" type="hidden" value=""> -->
-                        <div>
-                            <span id="titre_best_movie"></span>
+                        <div class="flex-column">
+                            <span id="titre_best_movie" class="mr-auto ml-auto"></span>
                         </div>
                         <div>
                             <p id="description_best_movie"></p>
                         </div>
-                        <div id="button_best_movie">
-                            <input type="button" class="button-play" value="&#9658; Regarder">
-                            <input type="button" class="button-detail modal-data" id="id_best_movie" data-film-url="" value="Plus d'infos">
+                        <div id="button_best_movie" class="d-flex mr-auto ml-auto">
+                            <input type="button" class="c-pointer button-play" value="&#9658; Regarder">
+                            <input type="button" class="c-pointer button-detail modal-data" id="id_best_movie" data-film-url="" value="Plus d'infos">
                         </div>
                     </div>
                     <div class="order-2">
@@ -75,7 +75,7 @@
             </div>
             <div class="content-modal flex-row">
                 <div class="infos-modal flex-column">
-                    <span id="titre_modal" class="titre-modal"></span>
+                    <span id="titre_modal" class="titre-modal mr-auto ml-auto"></span>
                     <span id="genre_modal"></span>
                     <span id="date_modal"></span>
                     <span id="note_modal"></span>

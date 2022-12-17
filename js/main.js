@@ -15,12 +15,6 @@ function getMovieDetailsByUrl(movieUrl) {
         });
 }
 
-async function test() {
-    url = "http://localhost:8000/api/v1/titles/?sort_by=-imdb_score";
-    const data = await fetch(url)
-    const {results} = await data.json()
-}
-
 function formatList(list) {
     listFormat = "";
     list.forEach(function (itemList, index) {
@@ -61,11 +55,14 @@ async function getMovieForModalByUrl(movieUrl) {
 
     const data = await fetch(movieUrl);
     const movieDetail = await data.json();
+    const formatter = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: '0' });
 
     var listGenre = "";
     var listRealisateur = "";
     var listActeur = "";
     var listPays = "";
+    var boxOffice = "Inconnu";
+    var nbVote = formatter.format(movieDetail.votes);
 
     listGenre = formatList(movieDetail.genres);
 
@@ -74,6 +71,9 @@ async function getMovieForModalByUrl(movieUrl) {
     dateSortie = dateArray[2] + "/" + dateArray[1] + "/" + dateArray[0]
 
     listRealisateur = formatList(movieDetail.directors);
+    if (listRealisateur == "Unknown") {
+        listRealisateur = "Inconnu";
+    }
 
     listActeur = formatList(movieDetail.actors);
     if (listActeur == "Unknown") {
@@ -82,19 +82,15 @@ async function getMovieForModalByUrl(movieUrl) {
 
     listPays = formatList(movieDetail.countries);
 
-    if (movieDetail.worldwide_gross_income === null) {
-        // Si on a pas le box office
-        boxOffice = "Inconnu"
-    } else {
+    if (movieDetail.worldwide_gross_income !== null) {
         // Formatage du montant a la Française : cocorico again '999 999 999'
-        const formatter = new Intl.NumberFormat('fr-FR', {maximumFractionDigits: '0'});
         boxOffice = formatter.format(movieDetail.worldwide_gross_income) + " $";
     }
 
     modalTitre.innerHTML = movieDetail.original_title;
     modalGenre.innerHTML = "Genres: " + listGenre; // tableau
     modalDateSortie.innerHTML = "Date de sortie: " + dateSortie;
-    modalNote.innerHTML = "<img class=\"imdb\" src=\"img/imdb.svg\" alt=\"imdb\"> " + movieDetail.imdb_score + "/10 - Spectateurs: " + movieDetail.avg_vote + "/10";
+    modalNote.innerHTML = "<img class=\"imdb\" src=\"img/imdb.svg\" alt=\"imdb\"> " + movieDetail.imdb_score + "/10 - Spectateurs: " + movieDetail.avg_vote + "/10 (" + nbVote + " votes)";
     modalRealisateur.innerHTML = "Réalisateur: " + listRealisateur; // tableau
     modalActeurs.innerHTML = "Acteurs: " + listActeur; // tableau
     modalDuree.innerHTML = "Durée: " + movieDetail.duration + " minutes";
@@ -160,7 +156,7 @@ function getTopSevenMovieByCategory(category, ordre) {
                         results2.pop()
                     }
                     var allResults = results1.concat(results2);
-                    var newSection = document.createElement('section');
+                    var newSection = document.createElement('div');
                     newSection.setAttribute("id", "categ_" + ordre);
                     newSection.setAttribute("class", "categorie  order-" + ordre + " ml-auto mr-auto");
                     // Création de la section la catégorie
@@ -171,7 +167,6 @@ function getTopSevenMovieByCategory(category, ordre) {
                         "<div class=\"bloc-categ flex-row\">" +
                             "<div class=\"prev-movie-arrow c-pointer\">" +
                                 "<span class=\"flex-column prev\">&lt;</span>" +
-                                // "<img class=\"prev-movie-arrow\" src=\"img/arrow_back.svg\" alt=\"arrowBack\">" +
                             "</div>" +
                             "<div class=\"container-movie flex-row\">";
 
@@ -190,7 +185,6 @@ function getTopSevenMovieByCategory(category, ordre) {
                             "</div>" +
                             "<div class=\"next-movie-arrow c-pointer flex-column mt-auto mb-auto\">" +
                                 "<span class=\"flex-column next\">&gt;</span>" +
-                                // "<img class=\"next-movie-arrow\" src=\"img/arrow_forward.png\" alt=\"arrowForward\">" +
                             "</div>" +
                         "</div>";
 
@@ -199,8 +193,6 @@ function getTopSevenMovieByCategory(category, ordre) {
                 });
         });
 }
-
-// var openModal = element.classList.contains('modal-data');
 
 // On écoute tous les clicks
 document.addEventListener('click', function(event) {
@@ -299,6 +291,4 @@ document.addEventListener('DOMContentLoaded', function () {
     getTopSevenMovieByCategory('romance', 5)
     getTopSevenMovieByCategory('action', 6)
     getTopSevenMovieByCategory('fantasy', 7)
-    test()
-
 });

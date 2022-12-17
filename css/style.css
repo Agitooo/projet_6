@@ -3,6 +3,7 @@ body {
     margin: 0;
     background-color: #171a1b;
     color: white;
+    font-family: Arial;
     font-size: 40px;
 }
 
@@ -155,8 +156,33 @@ header {
 .best-movie {
     height: 536px;
     width: 100%;
-    border: 1px solid black;
+    background-color: rgb(15, 15, 15);
     justify-content: space-between;
+}
+
+.content-best-movie {
+    justify-content: space-between;
+}
+
+#titre_best_movie {
+    margin-top: 40px;
+    font-size: 70px;
+}
+
+#button_best_movie {
+    justify-content: end;
+}
+
+.button-detail, 
+.button-play {
+    background-color: #313638;
+    color: white;
+    border: none;
+    width: auto;
+    padding: 10px 20px 10px 20px;
+    margin: 0px 10px 40px 10px;
+    height: 60px;
+    font-size: 30px;
 }
 
 .categorie {
@@ -242,7 +268,7 @@ header {
 #modal {
     z-index: 2;
     position: fixed;
-    background-color: rgb(10, 10, 10);
+    background-color: rgb(15, 15, 15);
     width: 80%;
     height: auto;
     top: 100px; 
@@ -274,8 +300,6 @@ header {
 
 .titre-modal {
     font-size: 60px;
-    margin-right: auto;
-    margin-left: auto;
 }
 
 .footer {
