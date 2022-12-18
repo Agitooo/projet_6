@@ -119,6 +119,66 @@ header {
     order: 15;
 }
 
+.order-16 {
+    order: 16;
+}
+
+.order-17 {
+    order: 17;
+}
+
+.order-18 {
+    order: 18;
+}
+
+.order-19 {
+    order: 19;
+}
+
+.order-20 {
+    order: 20;
+}
+
+.order-21 {
+    order: 21;
+}
+
+.order-22 {
+    order: 22;
+}
+
+.order-23 {
+    order: 23;
+}
+
+.order-24 {
+    order: 24;
+}
+
+.order-25 {
+    order: 25;
+}
+
+.order-26 {
+    order: 26;
+}
+
+.order-27 {
+    order: 27;
+}
+
+.order-28 {
+    order: 28;
+}
+
+.order-29 {
+    order: 29;
+}
+
+.order-30 {
+    order: 30;
+}
+
 .logo-img {
     height: 200px;
 }
@@ -248,6 +308,7 @@ header {
 
 .big-chiffre {
     font-size: 465px;
+    letter-spacing: -100px;
 }
 
 #background_best_movie {

@@ -1,18 +1,20 @@
 const urlMovie = "http://localhost:8000/api/v1/titles/";
+// Nombre de film visible sur le carousel (dynamique pour le fonctionnement du prev / next dans le carousel)
+const movieVisible = 3;
+// Nombre total de film récupéré (dynamique dans la récupération des films pour remplir carousel)
+const maxMovie = 7;
+// const maxMovie = 29; // les mêmes films reviennent en boucle...
 
 function capitalizeFirstLetter(string) {
     return string[0].toUpperCase() + string.slice(1);
 }
 
-function getMovieDetailsByUrl(movieUrl) {
+async function getMovieDetailsByUrl(movieUrl) {
     var movieDescription = document.getElementById("description_best_movie");
     movieDescription.innerHTML = "";
-    fetch(movieUrl)
-        .then((res) => res.json())
-        .then((data) => {
-            var movieDetail = data
-            movieDescription.innerHTML = movieDetail.description
-        });
+    var data = await fetch(movieUrl);
+    var movieDetail = await data.json();
+    movieDescription.innerHTML = movieDetail.description
 }
 
 function formatList(list) {
@@ -24,6 +26,9 @@ function formatList(list) {
             listFormat += itemList;
         }
     });
+    if (listFormat == "Unknown") {
+        listFormat = "Inconnu";
+    }
     return listFormat
 }
 
@@ -53,9 +58,9 @@ async function getMovieForModalByUrl(movieUrl) {
     modalBoxOffice.innerHTML = "";
     modalResume.innerHTML = "";
 
-    const data = await fetch(movieUrl);
-    const movieDetail = await data.json();
-    const formatter = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: '0' });
+    var data = await fetch(movieUrl);
+    var movieDetail = await data.json();
+    var formatter = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: '0' });
 
     var listGenre = "";
     var listRealisateur = "";
@@ -71,15 +76,7 @@ async function getMovieForModalByUrl(movieUrl) {
     dateSortie = dateArray[2] + "/" + dateArray[1] + "/" + dateArray[0]
 
     listRealisateur = formatList(movieDetail.directors);
-    if (listRealisateur == "Unknown") {
-        listRealisateur = "Inconnu";
-    }
-
     listActeur = formatList(movieDetail.actors);
-    if (listActeur == "Unknown") {
-        listActeur = "Inconnu";
-    }
-
     listPays = formatList(movieDetail.countries);
 
     if (movieDetail.worldwide_gross_income !== null) {
@@ -90,7 +87,8 @@ async function getMovieForModalByUrl(movieUrl) {
     modalTitre.innerHTML = movieDetail.original_title;
     modalGenre.innerHTML = "Genres: " + listGenre; // tableau
     modalDateSortie.innerHTML = "Date de sortie: " + dateSortie;
-    modalNote.innerHTML = "<img class=\"imdb\" src=\"img/imdb.svg\" alt=\"imdb\"> " + movieDetail.imdb_score + "/10 - Spectateurs: " + movieDetail.avg_vote + "/10 (" + nbVote + " votes)";
+    modalNote.innerHTML = "<img class=\"imdb\" src=\"img/imdb.svg\" alt=\"imdb\"> " + movieDetail.imdb_score +
+        "/10 - Spectateurs: " + movieDetail.avg_vote + "/10 (" + nbVote + " votes)";
     modalRealisateur.innerHTML = "Réalisateur: " + listRealisateur; // tableau
     modalActeurs.innerHTML = "Acteurs: " + listActeur; // tableau
     modalDuree.innerHTML = "Durée: " + movieDetail.duration + " minutes";
@@ -100,7 +98,7 @@ async function getMovieForModalByUrl(movieUrl) {
     modalPoster.src = movieDetail.image_url;
 }
 
-function getBestMovieByScore() {
+async function getBestMovieByScore() {
     // Récupération des éléments à remplir
     var movieId = document.getElementById("id_best_movie");
     var movieImage = document.getElementById("background_best_movie");
@@ -111,24 +109,22 @@ function getBestMovieByScore() {
     movieImage.innerHTML = "";
     movieTitle.innerHTML = "";
 
-    fetch(urlMovie + "?sort_by=-imdb_score")
-        .then((res) => res.json())
-        .then((data) => {
-            const { results } = data;
-            const bestMovie = results[0]
+    // Appel ajax pour récupérer les film les mieux notés
+    var data = await fetch(urlMovie + "?sort_by=-imdb_score");
+    var results = await data.json();
+    // On ne garde que le meilleur
+    var bestMovie = results.results[0];
 
-            // Parsing des données dans l'HTML
-            // movieId.value = bestMovie.id
-            movieId.setAttribute("data-film-url", bestMovie.url)
-            movieImage.src = bestMovie.image_url
-            movieTitle.innerHTML = bestMovie.title
+    // Parsing des données dans l'HTML
+    movieId.setAttribute("data-film-url", bestMovie.url)
+    movieImage.src = bestMovie.image_url
+    movieTitle.innerHTML = bestMovie.title
 
-            // Récupération des informations complète du film
-            getMovieDetailsByUrl(bestMovie.url)
-        });
+    // Récupération des informations complète du film
+    getMovieDetailsByUrl(bestMovie.url)
 }
 
-function getTopSevenMovieByCategory(category, ordre) {
+async function getTopSevenMovieByCategory(category, ordre) {
 
     var url = urlMovie + "?sort_by=-imdb_score";
     var categoryText = "Films les mieux notés";
@@ -136,62 +132,70 @@ function getTopSevenMovieByCategory(category, ordre) {
         url = url + "&genre=" + category;
         categoryText = "Top 7 des meilleurs films de la catégorie " + capitalizeFirstLetter(category);
     }
-    // Il n'y a que 5 résultats par page, il en faut 7 il faut donc aller aussi sur la page
-    var url2 = url + "&page=2";
     // Récupération des éléments à remplir
     var content = document.getElementById("content");
 
-    fetch(url)
-        .then((res) => res.json())
-        .then((data) => {
-            var { results1 } = data;
-            var results1 = data['results'];
-            fetch(url2)
-                .then((res) => res.json())
-                .then((data) => {
-                    var { results2 } = data;
-                    var results2 = data['results'];
-                    // On supprime les 3 derniers films car seul les 2 premiers de la seconde page nous intéressent
-                    while (results2.length > 2) {
-                        results2.pop()
-                    }
-                    var allResults = results1.concat(results2);
-                    var newSection = document.createElement('div');
-                    newSection.setAttribute("id", "categ_" + ordre);
-                    newSection.setAttribute("class", "categorie  order-" + ordre + " ml-auto mr-auto");
-                    // Création de la section la catégorie
-                    var contentSection =
-                        "<div class=\"titre-categ\" >" +
-                            "<span>" + categoryText + "</span>" +
-                        "</div>" +
-                        "<div class=\"bloc-categ flex-row\">" +
-                            "<div class=\"prev-movie-arrow c-pointer\">" +
-                                "<span class=\"flex-column prev\">&lt;</span>" +
-                            "</div>" +
-                            "<div class=\"container-movie flex-row\">";
+    var data = await fetch(url);
+    var results = await data.json();
+    if (category === '') {
+        results.results.shift();
+    }
+    var allResults = results.results
 
-                    allResults.forEach(function (movie, index) {
-                        var numFilm = index + 1;
-                        contentSection +=
-                                "<div class=\"movie flex-row card order-" + numFilm + "\">" +
-                                    "<div class=\"big-chiffre\">" + numFilm + "</div>" +
-                                    "<div class=\"shadow\">" +
-                                        "<img id=\"background_movie_" + numFilm + "\" class=\"affiche-film modal-data\" src=\"" + movie.image_url + "\" data-film-url=\"" + movie.url + "\">" +
-                                    "</div>" +
-                                "</div>";
-                    });
+    while (allResults.length < maxMovie) {
+        var dataNext = await fetch(results.next);
+        var resultsNext = await dataNext.json();
+        if (!resultsNext.results) {
+            break;
+        }
+        allResults = allResults.concat(resultsNext.results);
+    }
 
-                    contentSection +=
-                            "</div>" +
-                            "<div class=\"next-movie-arrow c-pointer flex-column mt-auto mb-auto\">" +
-                                "<span class=\"flex-column next\">&gt;</span>" +
-                            "</div>" +
-                        "</div>";
+    console.log(allResults)
 
-                    newSection.innerHTML = contentSection;
-                    content.append(newSection);
-                });
-        });
+    // On garde le nombre de film défini dans maxMovie
+    while (allResults.length > maxMovie) {
+        allResults.pop();
+    }
+    var newSection = document.createElement('div');
+    newSection.setAttribute("id", "categ_" + ordre);
+    newSection.setAttribute("class", "categorie  order-" + ordre + " ml-auto mr-auto");
+    // Création du bloc div catégorie
+    var contentSection =
+        "<div class=\"titre-categ\" >" +
+            "<span>" + categoryText + "</span>" +
+        "</div>" +
+        "<div class=\"bloc-categ flex-row\">" +
+            "<div class=\"prev-movie-arrow c-pointer\">" +
+                "<span class=\"flex-column prev\">&lt;</span>" +
+            "</div>" +
+            "<div class=\"container-movie flex-row\">";
+
+    allResults.forEach(function (movie, index) {
+        // Pour les meilleurs films on commence a 2 car le 1er est dans le cadre du dessus
+        if (category === "") {
+            var numFilm = index + 2;
+        } else {
+            var numFilm = index + 1;
+        }
+        contentSection +=
+                "<div class=\"movie flex-row card order-" + numFilm + "\">" +
+                    "<div class=\"big-chiffre\">" + numFilm + "</div>" +
+                    "<div class=\"shadow\">" +
+                        "<img id=\"background_movie_" + numFilm + "\" class=\"affiche-film modal-data\" src=\"" + movie.image_url + "\" data-film-url=\"" + movie.url + "\">" +
+                    "</div>" +
+                "</div>";
+    });
+
+    contentSection +=
+            "</div>" +
+            "<div class=\"next-movie-arrow c-pointer flex-column mt-auto mb-auto\">" +
+                "<span class=\"flex-column next\">&gt;</span>" +
+            "</div>" +
+        "</div>";
+
+    newSection.innerHTML = contentSection;
+    content.append(newSection);
 }
 
 // On écoute tous les clicks
@@ -235,18 +239,14 @@ document.addEventListener('click', function(event) {
         for (index = 0; index < movies.length; index++) {
             var classList = movies[index].className;
             if (regex.test(classList)) {
-                // On récupère la classe avec la regex
                 var match = classList.match(regex);
                 var classOrder = match[0];
-                // On découpe la classe pour avoir la valeur de l'ordre
                 var splitValOrder = classOrder.split('-');
                 var valOrder = splitValOrder[1];
-                if (valOrder <= 4) {
-                    // On change l'ordre des 4 premiers elements visible et on les mets a la fin
-                    var newValClassOrder = (parseInt(valOrder) + 3);
+                if (valOrder <= (maxMovie - movieVisible)) {
+                    var newValClassOrder = (parseInt(valOrder) + (movieVisible));
                 } else {
-                    // On récupère les elements non visible pour les remettre les 3 derniers visible
-                    var newValClassOrder = (parseInt(valOrder) - 4);
+                    var newValClassOrder = (parseInt(valOrder) - (maxMovie - movieVisible));
                 }
                 var newClassOrder = splitValOrder[0] + '-' + newValClassOrder;
                 movies[index].classList.remove(classOrder);
@@ -261,18 +261,14 @@ document.addEventListener('click', function(event) {
         for (index = 0; index < movies.length; index++) {
             var classList = movies[index].className;
             if (regex.test(classList)) {
-                // On récupère la classe avec la regex
                 var match = classList.match(regex);
                 var classOrder = match[0];
-                // On découpe la classe pour avoir la valeur de l'ordre
                 var splitValOrder = classOrder.split('-');
                 var valOrder = splitValOrder[1];
-                if (valOrder <= 3) {
-                    // On change l'ordre des 3 premiers elements visible et on les mets a la fin
-                    var newValClassOrder = (parseInt(valOrder) + 4);
+                if (valOrder <= movieVisible) {
+                    var newValClassOrder = (parseInt(valOrder) + (maxMovie - movieVisible));
                 } else {
-                    // On récupère les elements non visible pour les remettre les 3 premiers visible
-                    var newValClassOrder = (parseInt(valOrder) - 3);
+                    var newValClassOrder = (parseInt(valOrder) - movieVisible);
                 }
                 var newClassOrder = splitValOrder[0] + '-' + newValClassOrder;
                 movies[index].classList.remove(classOrder);
@@ -289,6 +285,6 @@ document.addEventListener('DOMContentLoaded', function () {
     getTopSevenMovieByCategory('animation', 3)
     getTopSevenMovieByCategory('sci-fi', 4)
     getTopSevenMovieByCategory('romance', 5)
-    getTopSevenMovieByCategory('action', 6)
-    getTopSevenMovieByCategory('fantasy', 7)
+    // getTopSevenMovieByCategory('action', 6)
+    // getTopSevenMovieByCategory('fantasy', 7)
 });
