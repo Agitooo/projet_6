@@ -130,7 +130,7 @@ async function getTopSevenMovieByCategory(category, ordre) {
     var categoryText = "Films les mieux notés";
     if (category !== "") {
         url = url + "&genre=" + category;
-        categoryText = "Top 7 des meilleurs films de la catégorie " + capitalizeFirstLetter(category);
+        categoryText = "Top " + maxMovie + " des meilleurs films de la catégorie " + capitalizeFirstLetter(category);
     }
     // Récupération des éléments à remplir
     var content = document.getElementById("content");
@@ -140,18 +140,18 @@ async function getTopSevenMovieByCategory(category, ordre) {
     if (category === '') {
         results.results.shift();
     }
+    var next = results.next
     var allResults = results.results
 
     while (allResults.length < maxMovie) {
-        var dataNext = await fetch(results.next);
+        var dataNext = await fetch(next);
         var resultsNext = await dataNext.json();
         if (!resultsNext.results) {
             break;
         }
+        next = resultsNext.next;
         allResults = allResults.concat(resultsNext.results);
     }
-
-    console.log(allResults)
 
     // On garde le nombre de film défini dans maxMovie
     while (allResults.length > maxMovie) {
@@ -196,7 +196,12 @@ async function getTopSevenMovieByCategory(category, ordre) {
 
     newSection.innerHTML = contentSection;
     content.append(newSection);
-}
+
+    // Une fois les films récupéré, on masque le bloc fake
+    var fakeCateg = document.getElementById("categ_0");
+    fakeCateg.classList.add('d-none');
+} !or
+
 
 // On écoute tous les clicks
 document.addEventListener('click', function(event) {
@@ -233,6 +238,7 @@ document.addEventListener('click', function(event) {
         modal.classList.add('d-flex');
     }
 
+    // Clic sur le bouton < d'un carousel
     if (target.classList.contains('prev')) {
         var movies = target.parentElement.nextElementSibling.children;
         var regex = /order-[0-9]{1,2}/;
@@ -255,6 +261,7 @@ document.addEventListener('click', function(event) {
         }
     }
 
+    // Clic sur le bouton > d'un carousel
     if (target.classList.contains('next')) {
         var movies = target.parentElement.previousElementSibling.children;
         var regex = /order-[0-9]{1,2}/;
