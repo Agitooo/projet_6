@@ -3,7 +3,7 @@ const urlMovie = "http://localhost:8000/api/v1/titles/";
 const movieVisible = 3;
 // Nombre total de film récupéré (dynamique dans la récupération des films pour remplir carousel)
 const maxMovie = 7;
-// const maxMovie = 29; // les mêmes films reviennent en boucle...
+// const maxMovie = 29;
 
 function capitalizeFirstLetter(string) {
     return string[0].toUpperCase() + string.slice(1);
