@@ -200,7 +200,7 @@ async function getTopSevenMovieByCategory(category, ordre) {
     // Une fois les films récupéré, on masque le bloc fake
     var fakeCateg = document.getElementById("categ_0");
     fakeCateg.classList.add('d-none');
-} !or
+}
 
 
 // On écoute tous les clicks
