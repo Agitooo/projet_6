@@ -45,7 +45,7 @@ async function getMovieForModalByUrl(movieUrl) {
     var modalBoxOffice = document.getElementById("boxoffice_modal");
     var modalResume = document.getElementById("resume_modal");
     var modalPoster = document.getElementById("poster_modal");
-    
+
     modalTitre.innerHTML = "";
     modalGenre.innerHTML = "";
     modalDateSortie.innerHTML = "";
@@ -58,8 +58,8 @@ async function getMovieForModalByUrl(movieUrl) {
     modalBoxOffice.innerHTML = "";
     modalResume.innerHTML = "";
 
-    var data = await fetch(movieUrl);
-    var movieDetail = await data.json();
+    var data = await fetch(movieUrl); // Promesse
+    var movieDetail = await data.json(); // Consomation de la promesse qu'on parse en json afin d'éxploiter les données
     var formatter = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: '0' });
 
     var listGenre = "";
